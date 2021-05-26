@@ -10,8 +10,6 @@ app.secret_key = SECRET.API_KEY.value
 def hello_world():
     suggestions = utils.get_suggestions()
     error = ''
-    if request.method == 'GET':
-        return render_template('home.html', suggestions=suggestions, error=error)
 
     if request.method == "POST":
         movie_name = request.form.get('search-field')
@@ -38,6 +36,8 @@ def hello_world():
                                     recommneded_movies=recommend_movies,
                                     error=error
                                 )
+    return render_template('home.html', suggestions=suggestions, error=error)
+       
 if __name__ == '__main__':
     app.debug = True
     app.run(threaded=True, port=5555)
