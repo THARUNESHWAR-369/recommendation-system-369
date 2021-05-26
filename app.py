@@ -38,6 +38,6 @@ def hello_world():
                                     recommneded_movies=recommend_movies,
                                     error=error
                                 )
-#if __name__ == '__main__':
-#    app.debug = True
-#    app.run(threaded=True, port=5555)
+if __name__ == '__main__':
+    app.debug = True
+    app.run(threaded=True, port=5555)
