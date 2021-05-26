@@ -5,7 +5,7 @@
 [![Maintenance](https://img.shields.io/badge/framework-flask-red.svg)](https://flask.palletsprojects.com/en/2.0.x/) 
 [![Maintenance](https://img.shields.io/badge/Frontend-HTML/CSS/JS-green.svg)](https://img.shields.io/badge/Frontend-HTML/CSS/JS-green.svg) 
 [![Maintenance](https://img.shields.io/badge/API-TMDB-orange.svg)](https://developers.themoviedb.org/3) 
-[![Maintenance](https://img.shields.io/badge/pythn-JUPETER/NOTEBOOK-yellow.svg)](https://developers.themoviedb.org/3) 
+[![Maintenance](https://img.shields.io/badge/python-JUPETER/NOTEBOOK-yellow.svg)](https://img.shields.io/badge/python-JUPETER/NOTEBOOK-yellow.svg) 
 
 
 This application provides all the details of the requested movie such as overview, genre, release date, rating, runtime, top cast, reviews, recommended movies, etc.
