@@ -1,8 +1,6 @@
-from flask import Flask, render_template, session, request, redirect
-import os
+from flask import Flask, render_template, request
 from utils.utils import UTILS
 from utils.secret import SECRET
-import json
 
 app = Flask(__name__)
 utils = UTILS()
@@ -40,6 +38,6 @@ def hello_world():
                                     recommneded_movies=recommend_movies,
                                     error=error
                                 )
-if __name__ == '__main__':
-    app.debug = True
-    app.run(threaded=True, port=5555)
+#if __name__ == '__main__':
+#    app.debug = True
+#    app.run(threaded=True, port=5555)
