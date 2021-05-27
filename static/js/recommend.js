@@ -1,5 +1,6 @@
 function load_loader(e) {
 	var title = $('.search-field').val();
+	console.log(title);
 	$("#loader").fadeIn();
 	$.ajax({
 		url: '/',
