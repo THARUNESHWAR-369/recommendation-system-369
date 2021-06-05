@@ -1,0 +1,277 @@
+body,
+html {
+	margin: 0;
+	background-color: coral;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+	background-color: coral/*rgb(255 255 255 / 95%)*/
+	;
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: coral/*rgb(255 255 255 / 95%)*/
+	;
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #f3622d;
+	border-radius: 8px;
+}
+
+#bg {
+	background-image: url("../images/bg.jpeg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+button.home-btn {
+	background: transparent;
+	border: none;
+	margin: 1px 8px;
+}
+
+#icons {
+	padding: 20px 20px;
+}
+
+input.search-field {
+	margin: 15px 8px;
+	border: none;
+	border-radius: 6px;
+	font-size: 1.5rem;
+	outline: none;
+	padding: 4px;
+}
+
+i.fas.fa-search.home-icon:hover,
+i.fas.fa-microphone.home-icon:hover {
+	color: #f3622d;
+}
+
+.home-icon {
+	color: coral;
+	font-size: xx-large;
+}
+
+*,
+ ::after,
+ ::before {
+	box-sizing: border-box;
+}
+
+ul#food_list {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	padding-right: 2rem;
+}
+
+.autoComplete_result {
+	margin: .15rem auto;
+	padding: .6rem;
+	max-width: 280px;
+	border: .05rem solid #e3e3e3;
+	list-style: none;
+	text-align: left;
+	font-size: 1.1rem;
+	color: grey;
+	transition: all .1s ease-in-out;
+	background: rgb(255 255 255 / 95%);
+}
+
+.autoComplete_result:last-child {
+	border-radius: 0 0 1rem 1rem;
+}
+
+.autoComplete_result:first-child {
+	border-top-right-radius: 1rem;
+	border-top-left-radius: 1rem;
+}
+
+.autoComplete_highlighted {
+	opacity: 1;
+	color: #f3622d;
+	font-weight: 700;
+}
+
+li.autoComplete_result:hover {
+	background: rgb(255 255 255 / 78%);
+	cursor: pointer;
+	border-left-color: coral;
+	border-right-color: coral;
+	border-left-width: 8px;
+	border-right-width: 8px;
+}
+
+input[type="text"] {
+	padding-left: 15px !important;
+}
+
+
+/*  Github Icon Animation  */
+
+.github-corner:hover .octo-arm {
+	animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+	0%,
+	100% {
+		transform: rotate(0)
+	}
+	20%,
+	60% {
+		transform: rotate(-25deg)
+	}
+	40%,
+	80% {
+		transform: rotate(10deg)
+	}
+}
+
+
+/*        Recommendation page           */
+
+#movie_name {
+	color: #ffffffeb;
+	text-shadow: -2px -3px 5px #000000d1, 3px 4px 5px #000000c2;
+}
+
+.poster-sm.text-center {
+	padding: 15px!important;
+}
+
+img.poster {
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 56%), -5px -1px 12px 3px rgb(0 0 0 / 61%);
+}
+
+div#details {
+	padding: 50px;
+	padding-left: 100px;
+}
+
+.button.card-btn.btn.btn-danger:hover {
+	background: #f3622d;
+}
+
+.card {
+	position: relative;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: transparent;
+	border-radius: 12px;
+}
+
+img.card-img-top {
+	border-radius: 12px;
+	/* border-top-left-radius: 12px; */
+}
+
+.card-group>.card {
+	/* flex: 1 0 0%; */
+	margin-bottom: 0;
+}
+
+.cast-img {
+	transition: .9s ease;
+	backface-visibility: hidden;
+}
+
+.fig {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+._fig {
+	transition: .5s ease;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.imghvr:hover .cast-img {
+	opacity: 0.3;
+	/*cursor: pointer;*/
+}
+
+.imghvr:hover .fig {
+	opacity: 1;
+}
+
+input.card-btn.btn.btn-danger {
+	background: #f3622d;
+	border: none;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 43%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+input.card-btn.btn.btn-danger:hover {
+	background-color: #ff5415;
+}
+
+.gototop {
+	background: coral;
+	border-radius: 50%;
+	padding: 1px 12px;
+	margin: -30px 10px;
+	color: wheat;
+	font-size: 2rem;
+}
+
+.gototop:hover {
+	cursor: pointer;
+}
+
+.movie-content {
+	display: inline-block;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#bnt:hover {
+	background: #ff5415;
+}
+
+.poster {
+	box-shadow: 1px 1px 3px 3px rgb(0 0 0 / 27%), -2px 0px 3px 3px rgb(0 0 0 / 10%);
+}
+
+.modal-footer.btn:hover {
+	color: black;
+	background: transparent;
+	border-color: black;
+}
+
+.sml-github, .sml-youtube, .sml-copyright {
+	text-shadow: -1px 0px 10px #0e0e0ee6, 0px 0px 7px #0a0a0ac9;
+}
+
+.sml-github {
+	padding-right: 10px;
+}
+
+.sml-github:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.sml-youtube:hover {
+	color: red;
+}
