@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if status == false %}    
+        <title>MRS</title>
+    {% elif status == true %}
+        <title>{{ movieDetails['original_title'] }}</title>
+    {% endif %}
+    
+
+    <!-- External css  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" type="text/css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-10/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-10/css/fontawesome.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script type="text/javascript">
+        var films = {{ movieNamesList|tojson }};
+        /*$(document).ready(function () {
+            $("#myModal").modal('show');
+        });*/
+     </script>
+
+</head>
+<body>
+    <!-- Loader  -->
+    <div class="loader__container" id="loader" style="display: none;">
+        <div class="__loader">
+            <div class="rocket">
+                <i class="fas fa-rocket"></i>
+                <i class="fas fa-cloud" style="--i:0;"></i>
+                <i class="fas fa-cloud" style="--i:1;"></i>
+                <i class="fas fa-cloud" style="--i:2;"></i>
+                <i class="fas fa-cloud" style="--i:3;"></i>
+            </div>
+            <span><i></i></span>
+        </div>
+    </div>
+
+
+    {% if status == true %}
+    
+        <div id="mpopupBox" class="mpopup">
+            <div class="mpopup-content">
+                <div class="mpopup-head">
+                    <span class="close" id="closeMovieModal">×</span>
+                    <h2>{{ movieDetails['original_title'] }}</h2>
+                </div>
+                <div class="modal__hr">
+                    <hr class="modal__hr">
+                </div>
+                <div class="mpopup-main">
+                    <ul class="movie__details__list">
+                        <li class="movie__details__li">MOVIE TITLE: <b>{{ movieDetails['original_title']|upper }}</b></li>
+                        <li class="movie__details__li">GENRES: <b>{{ movieDetails['genres']|upper }}</b></li>
+                        <li class="movie__details__li">TAGLINE: <b>{{ movieDetails['tagline']|upper }}</b></li>
+                        <li class="movie__details__li">OVERVIEW: <b>{{ movieDetails['overview'] }}</b></li>
+                        <li class="movie__details__li">RELEASE DATE: <b>{{ movieDetails['release_date'] }}</b></li>
+                        <li class="movie__details__li">STATUS: <b>{{ movieDetails['status'] }}</b></li>
+                        <li class="movie__details__li">BUDGET: <b>{{ movieDetails['budget'] }}</b></li>
+                        <li class="movie__details__li">REVENUE: <b>{{ movieDetails['revenue'] }}</b></li>
+                        <li class="movie__details__li">PRODUCTION COMPANIES: <b>{{ movieDetails['production_companies'] }}</b></li>
+                        <li class="movie__details__li">PRODUCTION COUNTRIES: <b>{{ movieDetails['production_countries'] }}</b></li>
+                        <li class="movie__details__li">RUNTIME: <b>{{ movieDetails['runtime'] }}</b></li>
+                        <li class="movie__details__li">RATING: <b>{{ movieDetails['vote_average'] }}/10</b></li>
+                        
+                    </ul>
+                </div>
+                <div class="modal__hr">
+                    <hr class="modal__hr">
+                </div>
+                <div class="mpopup-foot">
+                </div>
+            </div>
+        </div>
+        {% if castDetails != none %}
+            {% for individualCastDetails in castDetails %}
+            
+                <div id="mpopupBox_{{ individualCastDetails['name'] }}" class="mpopup">
+                    <div class="mpopup-content">
+                        <div class="mpopup-head">
+                            <span class="close" title="{{ individualCastDetails['name'] }}" id="close_cast_modal" onclick="closeCastModal(this);">×</span>
+                            <h2>{{ individualCastDetails['name'] }}</h2>
+                        </div>
+                        <div class="modal__hr">
+                            <hr class="modal__hr">
+                        </div>
+                        <div class="mpopup-main">
+                            <ul class="movie__details__list">
+                                <li class="movie__details__li">CHARACTER: <b>{{ individualCastDetails['character']|upper }}</b></li>
+                                <li class="movie__details__li">BIOGRAPHY: <b>{{ individualCastDetails['biography']|upper }}</b></li>
+                                <li class="movie__details__li">BIRTHDAY: <b>{{ individualCastDetails['birthday']|upper }}</b></li>
+                                <li class="movie__details__li">PLACE OF BIRTH: <b>{{ individualCastDetails['place_of_birth'] }}</b></li>
+                                <li class="movie__details__li">DEATHDAY: <b>{{ individualCastDetails['deathday'] }}</b></li>
+                            </ul>
+                        </div>
+                        <div class="modal__hr">
+                            <hr class="modal__hr">
+                        </div>
+                        <div class="mpopup-foot">
+                        </div>
+                    </div>
+                </div>
+                <script>
+
+                    var mpopup = document.getElementById('mpopupBox_{{ individualCastDetails["name"] }}');
+                    var close = document.getElementsById("close_cast_modal");
+
+                    function closeCastModal(val){
+                        var name = val.title;
+                        document.getElementById('mpopupBox_'+name).style.display="none";
+                    }
+                    window.onclick = function(event) {
+                        if (event.target == mpopup) {
+                            mpopup.style.display = "none";
+                        }
+                    }
+            
+                </script>
+        
+            {% endfor %}
+        {% endif %}
+
+
+
+
+        <div class="my__container" id="my__container">
+            <div class="nav__container">
+                <div class="navigation">
+                    <nav>
+                        <div class="float--left header" id="header">
+                            <header>Movie Recommedation System</header>
+                        </div>
+                    </nav>
+                </div>
+            </div>  
+        
+            <div class="container">
+                <div class="nav__body">
+                    <div class="search__container nav__body__container">
+                        <div class="form__container">
+                            <form class="search__form" id="search__form" action="/" method="post">
+                                <input type="text" class="search-movie" id="search-movie" name="search-movie" placeholder="search movie" required autocomplete="off">
+                                {%  if error != none %}    
+                                    <div class="error__container">
+                                        <h2 id="error_h2">{{error}}</h2>
+                                        <span id="close__error__container">X</span>
+                                    </div>
+                                {% endif %}
+                                <input value='Search' type="submit" class="submit-movie" id="submit-movie" onclick="load_loader();">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                
+            {% if status == true %}
+                <script>
+                    if (document.getElementById('loader').style.display=="flex"){
+                        document.getElementById('loader').style.display = "none";
+                    }
+                </script>
+                <div class="scroller__container" id="scroller__container" style="scroll-behavior: smooth;">
+                    <div class="scroller" id="sdwn" style="display: block;">
+                        <button><i class="fas fa-arrow-down"></i></button>
+                    </div>
+                    <div class="scroller" id="sup"style="display: none;">
+                        <button ><i class="fas fa-arrow-up"></i></button>
+                    </div>
+                </div>
+                <div class="add__hr">
+                    <hr>
+                </div>
+                <div class="movie__container" id="movie__container">
+                    <div class="movie__header_container">
+                        <div class="movie__header">
+                            <div class="poster__card">
+                                <i id="poster__card__i">
+                                    <div class="movile__title">
+                                        <p>{{ movieDetails['original_title'] }}</p>
+                                    </div>
+                                </i>
+                                <img src="{{ movieDetails['poster_path'] }}" class="poster__image">
+                                <div class="poster__card__btn">
+                                    <Button id="load_movie_details" onclick="loadMovieModal();">Click Me</Button>
+                                </div>
+                                <div class="text-block">
+                                    <h4>Click Me to know more</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="add__hr">
+                    <hr>
+                </div>
+
+                {% if castDetails != none %}
+                    <div class="cast__intro intro">
+                        <h1>TOP CAST</h1>
+                        <h4>(Click on the cast to know more)</h4>
+                    </div>
+                    <div class="cast__details">
+                        <div class="cast__details__container my__row">
+                            {% for individualCastDetails in castDetails %}
+                                <div class="cast__details__card">
+                                    <span>
+                                        <p>
+                                            {{ individualCastDetails['name'] }}
+                                        </p>
+                                    </span>
+                                    <div class="cast__header__container">
+                                        <div class="cast__header">
+                                            <img class="cast__img" src='{{ individualCastDetails["profile_path"] }}'>
+                                            <div class="cast__hover__btn">
+                                                <button title="{{ individualCastDetails['name'] }}" onclick="load_cast_modal(this);">Know More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="character__container">
+                                        <p>CHARACTER: {{ individualCastDetails['character'] }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="cast__intro intro">
+                        <h1>TOP CAST</h1>
+                        <h4>(no cast found)</h4>
+                    </div>
+                {% endif %}
+
+                <div class="add__hr">
+                    <hr>
+                </div>
+
+                {% if movieReviews != none %}
+                    <div class="intro">
+                        <h1>MOVIE REVIEWS</h1>
+                        <h4>(Click on the card to know more)</h4>
+                    </div>
+
+                    <div class="table__container">
+                        <table class="main__table" id="main__table">
+                            <tr>
+                                <th>REVIEWS</th>
+                                <th>SENTIMENT</th>
+                            </tr>
+                            {% for reviews, sentiment in movieReviews.items() %}
+                                <tr>
+                                    <td>{{ reviews }}</td>
+                                    <td>{{ sentiment }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="intro">
+                        <h1>MOVIE REVIEWS</h1>
+                        <h4>(no reviews found)</h4>
+                    </div>
+                {% endif %}
+
+                <div class="add__hr">
+                    <hr>
+                </div>
+                {% if recomMovieDetailsList != none %}
+                    <div class="intro">
+                        <h1>RECOMMENDED MOVIE</h1>
+                        <h4>(Click on the movie to know more)</h4>
+                    </div>
+
+                    <div class="recom__movie__container" id="scroll-bottom">
+                        <div class="recom__movie my__row">
+                            {% for recomMovieDetails in recomMovieDetailsList %}
+                                <div class="recom_movie_card">
+                                    <span id="recom__movie__card__span">
+                                        <p>
+                                            <i class="fa fa-star"></i>{{ recomMovieDetails['vote_average'] }}
+                                        </p>
+                                    </span>
+                                    <div class="recom__card__header">
+                                        <img class="recom__poster__img" src="{{ recomMovieDetails['poster_path'] }}">
+                                        <div class="load__movie__btn" id="load__movie__btn">
+                                            <button title="{{ recomMovieDetails['original_title'] }}" id="loadRecomMovie" onclick="loadMovie(this, 0);">Search<i style="padding-left: 10px;" class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="recom__card__bottom">
+                                        <div class="float--left recom__bottom__container">
+                                            <label class="recom__movie__release_date">{{ recomMovieDetails['release_date'] }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="intro">
+                        <h1>RECOMMENDED MOVIE</h1>
+                        <h4>(no Recommended movie found)</h4>
+                    </div>
+                {% endif %}
+
+            {% elif status == false %}
+            {% endif %}
+            
+        </div>
+    {% else %}
+    <div class="my__container" id="my__container">
+        <div class="nav__container">
+            <div class="navigation">
+                <nav>
+                    <div class="float--left header" id="header">
+                        <header>Movie Recommedation System</header>
+                    </div>
+                </nav>
+            </div>
+        </div>  
+    
+        <div class="container">
+            <div class="nav__body">
+                <div class="search__container nav__body__container">
+                    <div class="form__container">
+                        <form class="search__form" id="search__form" action="/" method="post">
+                            <input type="text" class="search-movie" id="search-movie" name="search-movie" placeholder="search movie" required autocomplete="off">
+                            {%  if error != none %}    
+                                    <div class="error__container" id="error__container">
+                                        <h2 id="error_h2">{{error}}</h2>
+                                        <span id="close__error__container" onclick="$('#error__container').hide();">X</span>
+                                    </div>
+                            {% endif %}
+                            <input value='Search' type="submit" class="submit-movie" id="submit-movie" onclick="load_loader();">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="top__search__container">
+                <div class="top__search">
+                    <p>Top search <i class="fas fa-search"></i>: </p>
+                    <ul class="top__search_ul">
+                        {% for ts in topSearch %}
+                            <li class="top_serach_li" onclick="loadMovie(this, 1)">{{ ts }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+    {% endif %}
+
+
+    <script>
+
+        /* Scroll */
+        var s_down = document.getElementById('sdwn');
+        var s_up = document.getElementById('sup');
+
+        let scrollToBottom = document.querySelector("#scroll-bottom")
+        let scrollTop = document.querySelector("#header")
+
+        try{
+            s_down.addEventListener("click", function() {
+                scrollToBottom.scrollIntoView()
+            });
+            
+            s_up.addEventListener("click", function() {
+                scrollTop.scrollIntoView()
+            });
+        }catch{}
+
+        window.onscroll = function() {
+            var d = document.documentElement;
+            var offset = d.scrollTop + window.innerHeight;
+            var height = d.offsetHeight;
+          
+            console.log('offset = ' + offset);
+            console.log('height = ' + height);
+
+            disVal = offset / height
+          
+
+            if (Math.ceil(disVal) >= 6){
+                s_down.style.display = "none";
+                s_up.style.display = "block";   
+            }
+            else{
+                s_down.style.display = "block";
+                s_up.style.display = "none"; 
+            }
+          };
+
+
+
+
+        
+        /* functions */
+
+
+        function load_loader(){
+            console.log(document.getElementById('search-movie').value);
+            if (document.getElementById('search-movie').value.length > 0 ){
+                console.log('loader');
+                if (document.getElementById('loader').style.display == "none"){
+                    document.getElementById('loader').style.display="flex";
+                }
+                else{
+                    document.getElementById('loader').style.display="none";
+                }
+                
+            }
+            else{
+                console.log('0 value');
+                document.getElementById('error_h2').innerHTML = "Choose Movie!"
+            }
+        }
+
+        function load_cast_modal(val){
+            var name = val.title;
+            document.getElementById('mpopupBox_'+name).style.display="block";
+            console.log(name);
+        }
+        
+        function loadMovie(val, state){
+            switch(state){
+                case 0:
+                    let movieTitle = val.title;
+                    console.log('movieTitle',movieTitle);
+                    document.getElementById('search-movie').value=movieTitle;
+                    document.getElementById('submit-movie').click();
+                    document.getElementById('my__container').style.display="none";
+                    break;
+                case 1:
+                    let topSearchTitle = val.textContent;
+                    console.log('movieTitle',topSearchTitle);
+                    document.getElementById('search-movie').value=topSearchTitle;
+                    document.getElementById('submit-movie').click();
+                    document.getElementById('my__container').style.display="none";
+                    break;
+            }
+        }
+
+        function loadMovieModal(){
+            /* modal */
+            var mpopup = document.getElementById('mpopupBox');
+            var mpLink = document.getElementById("load_movie_details")    ;        
+
+
+            if (document.getElementById('mpopupBox').style.display == "block"){
+                document.getElementById('mpopupBox').style.display = "none";
+            }
+            else{
+                document.getElementById('mpopupBox').style.display = "block";
+            }
+
+            
+            document.getElementById('closeMovieModal').onclick = function(){
+                document.getElementById('mpopupBox').style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == document.getElementById('mpopupBox')) {
+                    document.getElementById('mpopupBox').style.display = "none";
+                }
+                if (event.target == document.getElementById('loader')) {
+                    document.getElementById('loader').style.display = "none";
+                }
+            }
+  
+        }
+        
+
+        
+
+        
+
+
+    </script>
+
+
+    <!--  JQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!--  Autocomplete  -->
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/autocomplete.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+
+</body>
+</html>
