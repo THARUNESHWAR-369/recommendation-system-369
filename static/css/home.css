@@ -229,8 +229,9 @@ nav
 
 .navigation .header
 {
-    display: flex;    
+    display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .search-movie
@@ -367,7 +368,7 @@ nav
     width: 300px;
     height: auto;
     background: #fff;
-    box-shadow: 0 10px 25px rgb(0 0 0 / 20%);
+    box-shadow: 0 10px 25px 13px rgb(0 0 0 / 20%);
     border-radius: 0.3rem;
 }
 
@@ -821,7 +822,7 @@ z-index: -11;
     display: flex;
     justify-content: center;
     position: fixed;
-    left: 90%;
+    left: 85%;
     bottom: 5%;
     z-index: 10;
 }
@@ -840,7 +841,7 @@ z-index: -11;
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: var(--b-bs);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
 
 .recom__movie__container{
@@ -1048,10 +1049,39 @@ i.fa.fa-star {
 .top__search p i{font-family: 'Font Awesome 6 Free';font-size: 12px;color: #63bc84;padding-left: 5px;}
 
 
+.my__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: monospace;
+    flex-direction: column;
+    /* background: red; */
+}
 
+.footer__header {
+    letter-spacing: 1.4px;
+    text-shadow: 0 0px 5px rgba(0,0,0,0.2);
+}
 
+.foorter_hr{
+    height: 10px;
+}
 
+.footer__container{
+    width: 50%;
+    padding: 10px 50px;
+}
 
+.footer__header .fa-github{
+    font-size: 22px;
+    background: #eaeef0;
+}
+
+.header h3 {
+    font-family: monospace;
+    color: #3c3c3cd1;
+}
 
 
 /* variables */
@@ -1173,44 +1203,19 @@ i.fa.fa-star {
     background: #1ba94c;
 }
 
+.footer__header .fa-github:hover {
+    cursor: pointer;
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*  Media Query  */
 
 @media (max-width: 960px){
-    .top__search__container{
-    /* background: red; */
-    }
-
     .top__search{
     border-radius: 0.3rem;
 }
-
-    .top__search p{}
-
-    .top__search i{}
 
     .top__search_ul{
     display: flex;
